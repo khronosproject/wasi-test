@@ -29,7 +29,16 @@ def build_test(filepath, outdir):
 
     basename, ext = os.path.splitext(filepath)
 
-    if ext == '.rs':
+    if ext == '.c':
+        subprocess.check_call([
+            'clang',
+            '-target',
+            'wasm32-wasi',
+            '-o',
+            os.path.join(outdir, basename + '.wasm'),
+            filepath,
+        ])
+    elif ext == '.rs':
         subprocess.check_call([
             'rustc',
             '--target',
