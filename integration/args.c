@@ -4,8 +4,9 @@
 #include <string.h>
 
 int main(int argc, char* argv[]) {
-	assert(argc == 3);
-	assert(strcmp(argv[0], "one") == 0);
-	assert(strcmp(argv[1], "two") == 0);
-	assert(strcmp(argv[2], "three") == 0);
+	assert(argc == 4);
+	assert(strstr(argv[0], "args.wasm") != NULL);
+	assert(strcmp(argv[1], "one") == 0);
+	assert(strcmp(argv[2], "two") == 0);
+	assert(strcmp(argv[3], "three") == 0);
 }
