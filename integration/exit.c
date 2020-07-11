@@ -1,4 +1,4 @@
-// { "exitCode": "1" }
+// { "exitCode": 1 }
 
 #include <assert.h>
 #include <stdlib.h>
