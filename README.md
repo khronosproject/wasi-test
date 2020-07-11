@@ -22,3 +22,11 @@ To build all the tests run the following command:
 ```shell
 python build.py
 ```
+
+## Testing
+
+To run a compatability check on all the tests run the following command:
+
+```shell
+python compat.py
+```
