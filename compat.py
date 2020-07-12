@@ -26,6 +26,10 @@ def load_config(filepath):
 
     return config
 
+def test(cmd, config):
+    result = subprocess.run(cmd, encoding='utf8', input=config.get('stdin'), timeout=config.get('timeout', 5), capture_output=True)
+    assert_result(result, config)
+
 def test_node(filepath, config):
     cmd = ['node']
 
@@ -66,8 +70,7 @@ def test_node(filepath, config):
     cmd.append(filepath)
 
     # print(' '.join(cmd))
-    result = subprocess.run(cmd, encoding='utf8', input=config.get('stdin'), capture_output=True)
-    assert_result(result, config)
+    test(cmd, config)
 
 def test_wasmer(filepath, config):
     cmd = ['wasmer', 'run']
@@ -93,8 +96,7 @@ def test_wasmer(filepath, config):
         for arg in args:
             cmd.append(arg)
 
-    result = subprocess.run(cmd, encoding='utf8', input=config.get('stdin'), capture_output=True)
-    assert_result(result, config)
+    test(cmd, config)
 
 def test_wasmtime(filepath, config):
     cmd = ['wasmtime', 'run']
@@ -120,8 +122,7 @@ def test_wasmtime(filepath, config):
         for arg in args:
             cmd.append(arg)
 
-    result = subprocess.run(cmd, encoding='utf8', input=config.get('stdin'), capture_output=True)
-    assert_result(result, config)
+    test(cmd, config)
 
 def main():
     inputs = []
@@ -151,7 +152,7 @@ def main():
             try:
                 tests[name](filepath, config)
                 sys.stdout.write('\033[92mok\x1b[0m')
-            except AssertionError as err:
+            except Exception as err:
                 sys.stdout.write('\033[91mFAILED\x1b[0m')
             finally:
                 sys.stdout.write('\n')
