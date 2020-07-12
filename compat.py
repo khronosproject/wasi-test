@@ -6,6 +6,7 @@ import os
 import shutil
 import subprocess
 import sys
+import textwrap
 
 def assert_result(actual, expected):
     assert(actual.stdout == expected.get('stdout', ''))
@@ -24,6 +25,49 @@ def load_config(filepath):
         config = json.load(f)
 
     return config
+
+def test_node(filepath, config):
+    cmd = ['node']
+
+    cmd.append('--no-warnings')
+    cmd.append('--experimental-wasi-unstable-preview1')
+    cmd.append('--experimental-wasm-bigint')
+
+    with open('.node.js', 'w') as f:
+        f.write(textwrap.dedent('''
+          const fs = require("fs");
+          const { WASI } = require("wasi");
+
+          const config = JSON.parse(process.argv[2]);
+          const buffer = fs.readFileSync(process.argv[3]);
+
+          const wasi = new WASI({
+            env: config.env,
+            args: [process.argv[3], ...config.args],
+            preopens: config.preopens,
+          });
+
+          WebAssembly.instantiate(buffer, {
+            wasi_snapshot_preview1: wasi.wasiImport,
+          }).then(function({ instance }) {
+              wasi.start(instance);
+          });
+        '''))
+
+        cmd.append('.node.js')
+
+    if config.get('env') == None:
+        config['env'] = {}
+
+    if config.get('args') == None:
+        config['args'] = []
+
+    cmd.append(json.dumps(config))
+    cmd.append(filepath)
+
+    # print(' '.join(cmd))
+    result = subprocess.run(cmd, encoding='utf8', input=config.get('stdin'), capture_output=True)
+    assert_result(result, config)
 
 def test_wasmer(filepath, config):
     cmd = ['wasmer', 'run']
@@ -84,6 +128,7 @@ def main():
     inputs.extend(glob.glob("build/**/*.wasm"))
 
     tests = {
+            "node": test_node,
             "wasmer": test_wasmer,
             "wasmtime": test_wasmtime,
     }
