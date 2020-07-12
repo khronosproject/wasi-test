@@ -30,6 +30,47 @@ def test(cmd, config):
     result = subprocess.run(cmd, encoding='utf8', input=config.get('stdin'), timeout=config.get('timeout', 5), capture_output=True)
     assert_result(result, config)
 
+def test_deno(filepath, config):
+    cmd = ['deno', 'run']
+
+    cmd.append('--quiet')
+    cmd.append('--allow-all')
+    cmd.append('--unstable')
+
+    with open('.deno.ts', 'w') as f:
+        f.write(textwrap.dedent('''
+          import WASI from "https://deno.land/std/wasi/snapshot_preview1.ts";
+
+          const config = JSON.parse(Deno.args[0]);
+          const buffer = Deno.readFileSync(Deno.args[1]);
+
+          const wasi = new WASI({
+            env: config.env,
+            args: [Deno.args[1], ...config.args],
+            preopens: config.preopens,
+          });
+
+          WebAssembly.instantiate(buffer, {
+            wasi_snapshot_preview1: wasi.exports,
+          }).then(function({ instance }) {
+              wasi.memory = instance.exports.memory;
+              instance.exports._start();
+          });
+        '''))
+
+    cmd.append('.deno.ts')
+
+    if config.get('env') == None:
+        config['env'] = {}
+
+    if config.get('args') == None:
+        config['args'] = []
+
+    cmd.append(json.dumps(config))
+    cmd.append(filepath)
+
+    test(cmd, config)
+
 def test_node(filepath, config):
     cmd = ['node']
 
@@ -129,6 +170,7 @@ def main():
     inputs.extend(glob.glob("build/**/*.wasm"))
 
     tests = {
+            "deno": test_deno,
             "node": test_node,
             "wasmer": test_wasmer,
             "wasmtime": test_wasmtime,
