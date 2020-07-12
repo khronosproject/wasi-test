@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 
+import argparse
 import glob
 import json
 import os
@@ -56,8 +57,13 @@ def build_test(filepath, outdir):
         f.write('\n')
 
 def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--outdir', dest="outdir", type=str, default=".")
+
+    args = parser.parse_args()
+
     for filepath in glob.iglob('integration/*.*'):
-        build_test(filepath, "build")
+        build_test(filepath, outdir=args.outdir)
 
 if __name__ == '__main__':
     main()
