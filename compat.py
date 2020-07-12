@@ -167,7 +167,7 @@ def test_wasmtime(filepath, config):
 
 def main():
     inputs = []
-    inputs.extend(glob.glob("build/**/*.wasm"))
+    inputs.extend(glob.glob("**/*.wasm", recursive=True))
 
     tests = {
             "deno": test_deno,
