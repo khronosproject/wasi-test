@@ -62,7 +62,11 @@ def main():
 
     args = parser.parse_args()
 
-    for filepath in glob.iglob('integration/*.*'):
+    sources = []
+    sources.extend(glob.glob('integration/*.c'))
+    sources.extend(glob.glob('integration/*.rs'))
+
+    for filepath in sources:
         build_test(filepath, outdir=args.outdir)
 
 if __name__ == '__main__':
