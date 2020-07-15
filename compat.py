@@ -110,7 +110,6 @@ def test_node(filepath, config):
     cmd.append(json.dumps(config))
     cmd.append(filepath)
 
-    # print(' '.join(cmd))
     test(cmd, config)
 
 def test_wasmer(filepath, config):
