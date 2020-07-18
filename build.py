@@ -63,7 +63,7 @@ def main():
     args = parser.parse_args()
 
     sources = []
-    sources.extend(glob.glob('integration/*.c'))
+    sources.extend(glob.glob('libc/*.c'))
     sources.extend(glob.glob('integration/*.rs'))
 
     for filepath in sources:
