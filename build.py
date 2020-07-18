@@ -64,7 +64,7 @@ def main():
 
     sources = []
     sources.extend(glob.glob('libc/*.c'))
-    sources.extend(glob.glob('integration/*.rs'))
+    sources.extend(glob.glob('std/*.rs'))
 
     for filepath in sources:
         build_test(filepath, outdir=args.outdir)
