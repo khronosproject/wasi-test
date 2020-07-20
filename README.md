@@ -12,7 +12,7 @@ contained at the top of the source code of a test case.
 
 ## Prerequisites
 
-- Python
+- Python (optional)
 - Rust
 
 ## Building
@@ -20,7 +20,7 @@ contained at the top of the source code of a test case.
 To build all the tests run the following command:
 
 ```shell
-python build.py
+cargo build --wasm32-wasi
 ```
 
 ## Testing
