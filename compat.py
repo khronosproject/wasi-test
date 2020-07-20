@@ -166,7 +166,7 @@ def test_wasmtime(filepath, config):
 
 def main():
     inputs = []
-    inputs.extend(glob.glob("**/*.wasm", recursive=True))
+    inputs.extend(sorted(glob.glob("target/wasm32-wasi/**/*.wasm")))
 
     tests = {
             "deno": test_deno,
@@ -176,8 +176,13 @@ def main():
     }
 
     for filepath in inputs:
-        basename, ext = os.path.splitext(filepath)
-        config = load_config(basename + '.json')
+        filename, ext = os.path.splitext(filepath)
+        dirname = os.path.dirname(filepath)
+        basename = os.path.basename(filename)
+
+        pattern = os.path.join(dirname, '**', '*', basename + '.json')
+        matches = glob.glob(pattern, recursive=True)
+        config = load_config(matches[0])
 
         sys.stdout.write('test ')
         sys.stdout.write(filepath)
