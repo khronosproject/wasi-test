@@ -9,7 +9,7 @@
 fn main() {
   let mut args = std::env::args();
   assert_eq!(args.len(), 4);
-  assert!(args.next().unwrap().contains("std_env_args.wasm"));
+  assert!(args.next().unwrap().contains("std_env_args_some.wasm"));
   assert_eq!(args.next().unwrap(), "one");
   assert_eq!(args.next().unwrap(), "two");
   assert_eq!(args.next().unwrap(), "three");
