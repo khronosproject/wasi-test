@@ -1,4 +1,6 @@
-// { "stderr": "Hello, stderr!" }
+// {
+//     "stderr": "Hello, stderr!"
+// }
 
 use std::io::Write;
 

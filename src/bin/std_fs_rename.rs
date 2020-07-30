@@ -1,4 +1,8 @@
-// { "preopens": { "/scratch": "scratch" } }
+// {
+//     "preopens": {
+//         "/scratch": "scratch"
+//     }
+// }
 
 fn main() {
   let old_path = "/scratch/old_file";

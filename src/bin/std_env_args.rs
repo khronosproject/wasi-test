@@ -1,4 +1,10 @@
-// { "args": ["one", "two", "three" ]}
+// {
+//     "args": [
+//         "one",
+//         "two",
+//         "three"
+//     ]
+// }
 
 fn main() {
   let mut args = std::env::args();

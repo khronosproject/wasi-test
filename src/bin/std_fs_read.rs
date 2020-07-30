@@ -1,4 +1,8 @@
-// { "preopens": { "/fixture": "fixture" } }
+// {
+//     "preopens": {
+//         "/fixture": "fixture"
+//     }
+// }
 
 fn main() {
   assert_eq!(std::fs::read("/fixture/file").unwrap(), b"file\n");

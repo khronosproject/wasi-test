@@ -1,4 +1,10 @@
-// { "env": { "one": "1", "two": "2", "three": "3" } }
+// {
+//     "env": {
+//         "one": "1",
+//         "two": "2",
+//         "three": "3"
+//     }
+// }
 
 fn main() {
   let vars = std::env::vars();

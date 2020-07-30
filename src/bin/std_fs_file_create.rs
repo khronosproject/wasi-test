@@ -1,4 +1,8 @@
-// { "preopens": { "/scratch": "scratch" } }
+// {
+//     "preopens": {
+//         "/scratch": "scratch"
+//     }
+// }
 
 fn main() {
   assert!(std::fs::File::create("/scratch/file").is_ok());

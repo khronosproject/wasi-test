@@ -1,4 +1,9 @@
-// { "preopens": { "/fixture": "fixture", "/scratch": "scratch" } }
+// {
+//     "preopens": {
+//         "/fixture": "fixture",
+//         "/scratch": "scratch"
+//     }
+// }
 
 fn main() {
   assert!(

@@ -1,4 +1,6 @@
-// { "stdout": "Hello, stdout!" }
+// {
+//     "stdout": "Hello, stdout!"
+// }
 
 use std::io::Write;
 

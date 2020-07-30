@@ -1,4 +1,8 @@
-// { "preopens": { "/fixture": "fixture" } }
+// {
+//     "preopens": {
+//         "/fixture": "fixture"
+//     }
+// }
 
 use std::io::Seek;
 
