@@ -1,4 +1,8 @@
-// { "preopens": { "/fixture": "fixture" } }
+// {
+//     "preopens": {
+//         "/fixture": "fixture"
+//     }
+// }
 
 fn main() {
   let file = std::fs::File::open("/fixture/file").unwrap();

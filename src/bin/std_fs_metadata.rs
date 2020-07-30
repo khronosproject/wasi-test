@@ -1,4 +1,8 @@
-// { "preopens": { "/fixture": "fixture" } }
+// {
+//     "preopens": {
+//         "/fixture": "fixture"
+//     }
+// }
 
 fn main() {
   let metadata = std::fs::metadata("/fixture/directory").unwrap();

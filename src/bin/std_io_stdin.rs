@@ -1,4 +1,6 @@
-// { "stdin": "Hello, stdin!" }
+// {
+//     "stdin": "Hello, stdin!"
+// }
 
 use std::io::Read;
 

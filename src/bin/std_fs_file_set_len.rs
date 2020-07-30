@@ -1,4 +1,8 @@
-// { "preopens": { "/scratch": "scratch" } }
+// {
+//     "preopens": {
+//         "/scratch": "scratch"
+//     }
+// }
 
 fn main() {
   let file = std::fs::File::create("/scratch/file").unwrap();

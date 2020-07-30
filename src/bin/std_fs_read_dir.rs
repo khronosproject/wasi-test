@@ -1,4 +1,8 @@
-// { "preopens": { "/fixture": "fixture" } }
+// {
+//     "preopens": {
+//         "/fixture": "fixture"
+//     }
+// }
 
 fn main() {
   let entries = std::fs::read_dir("/fixture").unwrap();

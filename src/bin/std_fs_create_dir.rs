@@ -1,4 +1,8 @@
-// { "preopens": { "/scratch": "scratch" } }
+// {
+//     "preopens": {
+//         "/scratch": "scratch"
+//     }
+// }
 
 fn main() {
   assert!(std::fs::create_dir("/scratch/directory").is_ok());

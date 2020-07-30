@@ -1,4 +1,8 @@
-// { "preopens": { "/scratch": "scratch" } }
+// {
+//     "preopens": {
+//         "/scratch": "scratch"
+//     }
+// }
 
 use std::io::Write;
 
