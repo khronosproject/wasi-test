@@ -1,9 +1,11 @@
 // {
-//     "preopens": {
-//         "/scratch": "scratch"
-//     },
-//     "files": {
-//         "scratch/file": "file"
+//     "main": {
+//         "preopens": {
+//             "/scratch": "scratch"
+//         },
+//         "files": {
+//             "scratch/file": "file"
+//         }
 //     }
 // }
 

@@ -1,5 +1,7 @@
 // {
-//     "stdout": "Hello, stdout!"
+//     "main": {
+//         "stdout": "Hello, stdout!"
+//     }
 // }
 
 use std::io::Write;

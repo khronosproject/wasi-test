@@ -1,5 +1,7 @@
 // {
-//     "stderr": "Hello, stderr!"
+//     "main": {
+//         "stderr": "Hello, stderr!"
+//     }
 // }
 
 use std::io::Write;

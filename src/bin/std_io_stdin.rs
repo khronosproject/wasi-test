@@ -1,5 +1,7 @@
 // {
-//     "stdin": "Hello, stdin!"
+//     "main": {
+//         "stdin": "Hello, stdin!"
+//     }
 // }
 
 use std::io::Read;

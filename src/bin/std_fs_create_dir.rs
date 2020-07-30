@@ -1,6 +1,8 @@
 // {
-//     "preopens": {
-//         "/scratch": "scratch"
+//     "main": {
+//         "preopens": {
+//             "/scratch": "scratch"
+//         }
 //     }
 // }
 

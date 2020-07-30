@@ -24,7 +24,7 @@ def load_config(filepath):
     with open(filepath) as f:
         config = json.load(f)
 
-    return config
+    return config.get('main')
 
 def test(cmd, config):
     result = subprocess.run(cmd, encoding='utf8', input=config.get('stdin'), timeout=config.get('timeout', 5), capture_output=True)

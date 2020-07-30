@@ -1,9 +1,11 @@
 // {
-//     "args": [
-//         "one",
-//         "two",
-//         "three"
-//     ]
+//     "main": {
+//         "args": [
+//             "one",
+//             "two",
+//             "three"
+//         ]
+//     }
 // }
 
 fn main() {

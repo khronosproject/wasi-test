@@ -1,5 +1,7 @@
 // {
-//     "exitCode": 120
+//     "main": {
+//         "exitCode": 120
+//     }
 // }
 
 fn main() {
