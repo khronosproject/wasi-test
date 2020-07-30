@@ -13,6 +13,9 @@ fn generate_spec(src_dir: &std::path::Path, out_dir: &std::path::Path) {
                 .replace(".rs", ".json"),
                 );
 
+            let value: serde_json::Value = serde_json::from_str(&prelude).unwrap();
+            let prelude = value.to_string();
+
             let out_data = prelude.as_bytes();
 
             std::fs::write(out_path, out_data).unwrap();
