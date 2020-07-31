@@ -6,6 +6,7 @@ import os
 import shutil
 import subprocess
 import sys
+import tempfile
 import textwrap
 
 def assert_result(actual, expected):
@@ -26,11 +27,11 @@ def load_config(filepath):
 
     return config
 
-def test(cmd, config):
-    result = subprocess.run(cmd, encoding='utf8', input=config.get('stdin'), timeout=config.get('timeout', 5), capture_output=True)
+def test(cmd, config, cwd):
+    result = subprocess.run(cmd, cwd=cwd, encoding='utf8', input=config.get('stdin'), timeout=config.get('timeout', 5), capture_output=True)
     assert_result(result, config)
 
-def test_deno(filepath, config):
+def test_deno(filepath, config, cwd):
     cmd = ['deno', 'run']
 
     cmd.append('--quiet')
@@ -58,7 +59,7 @@ def test_deno(filepath, config):
           });
         '''))
 
-    cmd.append('.deno.ts')
+    cmd.append(os.path.abspath('.deno.ts'))
 
     if config.get('env') == None:
         config['env'] = {}
@@ -69,9 +70,9 @@ def test_deno(filepath, config):
     cmd.append(json.dumps(config))
     cmd.append(filepath)
 
-    test(cmd, config)
+    test(cmd, config, cwd)
 
-def test_node(filepath, config):
+def test_node(filepath, config, cwd):
     cmd = ['node']
 
     cmd.append('--no-warnings')
@@ -99,7 +100,7 @@ def test_node(filepath, config):
           });
         '''))
 
-        cmd.append('.node.js')
+        cmd.append(os.path.abspath('.node.js'))
 
     if config.get('env') == None:
         config['env'] = {}
@@ -110,9 +111,9 @@ def test_node(filepath, config):
     cmd.append(json.dumps(config))
     cmd.append(filepath)
 
-    test(cmd, config)
+    test(cmd, config, cwd)
 
-def test_wasmer(filepath, config):
+def test_wasmer(filepath, config, cwd):
     cmd = ['wasmer', 'run']
     cmd.append(filepath)
 
@@ -136,9 +137,9 @@ def test_wasmer(filepath, config):
         for arg in args:
             cmd.append(arg)
 
-    test(cmd, config)
+    test(cmd, config, cwd)
 
-def test_wasmtime(filepath, config):
+def test_wasmtime(filepath, config, cwd):
     cmd = ['wasmtime', 'run']
 
     env = config.get('env')
@@ -162,7 +163,7 @@ def test_wasmtime(filepath, config):
         for arg in args:
             cmd.append(arg)
 
-    test(cmd, config)
+    test(cmd, config, cwd)
 
 def main():
     inputs = []
@@ -184,6 +185,9 @@ def main():
         matches = glob.glob(pattern, recursive=True)
         config = load_config(matches[0])
 
+        workdir = tempfile.mkdtemp()
+        shutil.copytree("fixture", os.path.join(workdir, "fixture"), symlinks=True)
+
         sys.stdout.write('test ')
         sys.stdout.write(filepath)
         sys.stdout.write(' ... ')
@@ -196,7 +200,7 @@ def main():
             sys.stdout.write(' ... ')
 
             try:
-                tests[name](filepath, config)
+                tests[name](os.path.abspath(filepath), config, workdir)
                 sys.stdout.write('\033[92mok\x1b[0m')
             except Exception as err:
                 sys.stdout.write('\033[91mFAILED\x1b[0m')
