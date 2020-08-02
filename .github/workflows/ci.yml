@@ -20,4 +20,4 @@ jobs:
         targets: wasm32-wasi
 
     - name: Build
-      run: cargo build
+      run: cargo build --target=wasm32-wasi
