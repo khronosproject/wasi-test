@@ -186,7 +186,7 @@ def main():
         config = load_config(matches[0])
 
         workdir = tempfile.mkdtemp()
-        shutil.copytree("fixture", os.path.join(workdir, "fixture"), symlinks=True)
+        shutil.copytree("fixtures", os.path.join(workdir, "fixtures"), symlinks=True)
 
         sys.stdout.write('test ')
         sys.stdout.write(filepath)

@@ -1,6 +1,6 @@
 // {
 //     "preopens": {
-//         "fixture": "fixture"
+//         "fixtures": "fixtures"
 //     }
 // }
 
