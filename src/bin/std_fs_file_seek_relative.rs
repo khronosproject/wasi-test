@@ -1,13 +1,13 @@
 // {
 //     "preopens": {
-//         "fixture": "fixture"
+//         "fixtures": "fixtures"
 //     }
 // }
 
 use std::io::Seek;
 
 fn main() {
-  let mut file = std::fs::File::open("fixture/file").unwrap();
+  let mut file = std::fs::File::open("fixtures/file").unwrap();
   assert_eq!(file.seek(std::io::SeekFrom::Current(0)).unwrap(), 0);
 
   assert_eq!(file.seek(std::io::SeekFrom::Start(1)).unwrap(), 1);

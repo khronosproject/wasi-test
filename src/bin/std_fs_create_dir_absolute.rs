@@ -1,10 +1,10 @@
 // {
 //     "preopens": {
-//         "/fixture": "fixture"
+//         "/fixtures": "fixtures"
 //     }
 // }
 
 fn main() {
-  assert!(std::fs::create_dir("/fixture/new_directory").is_ok());
-  assert!(std::fs::metadata("/fixture/new_directory").unwrap().is_dir());
+  assert!(std::fs::create_dir("/fixtures/new_directory").is_ok());
+  assert!(std::fs::metadata("/fixtures/new_directory").unwrap().is_dir());
 }

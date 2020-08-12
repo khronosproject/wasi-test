@@ -1,11 +1,11 @@
 // {
 //     "preopens": {
-//         "fixture": "fixture"
+//         "fixtures": "fixtures"
 //     }
 // }
 
 fn main() {
-  let file = std::fs::File::create("fixture/new_file").unwrap();
+  let file = std::fs::File::create("fixtures/new_file").unwrap();
 
   assert!(file.set_len(0).is_ok());
   assert_eq!(file.metadata().unwrap().len(), 0);

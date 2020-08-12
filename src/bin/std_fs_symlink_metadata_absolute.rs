@@ -1,27 +1,27 @@
 // {
 //     "preopens": {
-//         "/fixture": "fixture"
+//         "/fixtures": "fixtures"
 //     }
 // }
 
 fn main() {
-  let metadata = std::fs::symlink_metadata("/fixture/directory").unwrap();
+  let metadata = std::fs::symlink_metadata("/fixtures/directory").unwrap();
   assert!(metadata.file_type().is_dir());
 
   let metadata =
-    std::fs::symlink_metadata("/fixture/symlink_to_directory").unwrap();
+    std::fs::symlink_metadata("/fixtures/symlink_to_directory").unwrap();
   assert!(metadata.file_type().is_symlink());
 
-  let metadata = std::fs::symlink_metadata("/fixture/file").unwrap();
+  let metadata = std::fs::symlink_metadata("/fixtures/file").unwrap();
   assert!(metadata.file_type().is_file());
 
-  let metadata = std::fs::symlink_metadata("/fixture/symlink_to_file").unwrap();
+  let metadata = std::fs::symlink_metadata("/fixtures/symlink_to_file").unwrap();
   assert!(metadata.file_type().is_symlink());
 
-  let metadata = std::fs::symlink_metadata("/fixture/directory/file").unwrap();
+  let metadata = std::fs::symlink_metadata("/fixtures/directory/file").unwrap();
   assert!(metadata.file_type().is_file());
 
   let metadata =
-    std::fs::symlink_metadata("/fixture/directory/symlink_to_file").unwrap();
+    std::fs::symlink_metadata("/fixtures/directory/symlink_to_file").unwrap();
   assert!(metadata.file_type().is_symlink());
 }
