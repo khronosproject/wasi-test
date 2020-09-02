@@ -14,7 +14,7 @@ fn generate_spec(src_dir: &std::path::Path, out_dir: &std::path::Path) {
                 );
 
             let value: serde_json::Value = serde_json::from_str(&prelude).unwrap();
-            let prelude = value.to_string();
+            let prelude = serde_json::to_string_pretty(&value).unwrap();
 
             let out_data = prelude.as_bytes();
 
