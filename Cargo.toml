@@ -13,3 +13,4 @@ wasi = "0.10.0+wasi-snapshot-preview1"
 
 [profile.release]
 lto = true
+opt-level = "z"
