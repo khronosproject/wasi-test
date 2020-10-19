@@ -20,7 +20,7 @@ contained at the top of the source code of a test case.
 To build all the tests run the following command:
 
 ```shell
-cargo build --wasm32-wasi
+cargo build --target wasm32-wasi
 ```
 
 ## Testing
