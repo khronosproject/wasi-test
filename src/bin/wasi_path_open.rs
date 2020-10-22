@@ -10,8 +10,8 @@ unsafe fn test_wasi_path_open_parent_directory() {
         dir_fd,
         0,
         "..",
-        wasi::OFLAGS_CREAT,
-        wasi::RIGHTS_FD_WRITE | wasi::RIGHTS_FD_TELL,
+        wasi::OFLAGS_DIRECTORY,
+        0,
         0,
         0,
     ).unwrap_err();
@@ -25,8 +25,8 @@ unsafe fn test_wasi_path_open_symlink_to_parent_directory() {
         dir_fd,
         0,
         "symlink_to_parent_directory",
-        wasi::OFLAGS_CREAT,
-        wasi::RIGHTS_FD_WRITE | wasi::RIGHTS_FD_TELL,
+        wasi::OFLAGS_DIRECTORY,
+        0,
         0,
         0,
     ).unwrap_err();
