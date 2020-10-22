@@ -23,7 +23,7 @@ unsafe fn test_wasi_path_open_symlink_to_parent_directory() {
     let dir_fd = 3;
     let err = wasi::path_open(
         dir_fd,
-        0,
+        wasi::LOOKUPFLAGS_SYMLINK_FOLLOW,
         "symlink_to_parent_directory",
         wasi::OFLAGS_DIRECTORY,
         0,
