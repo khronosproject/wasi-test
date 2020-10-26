@@ -4,7 +4,7 @@
 
 unsafe fn test_proc_exit_one() {
     wasi::proc_exit(1);
-    unreachable!();
+    unreachable!("proc_exit");
 }
 
 fn main() {
