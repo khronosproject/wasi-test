@@ -54,8 +54,7 @@ def test_deno(filepath, config, cwd):
           WebAssembly.instantiate(buffer, {
             wasi_snapshot_preview1: wasi.exports,
           }).then(function({ instance }) {
-              wasi.memory = instance.exports.memory;
-              instance.exports._start();
+            wasi.start(instance);
           });
         '''))
 
