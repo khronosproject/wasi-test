@@ -164,6 +164,39 @@ def test_wasmtime(filepath, config, cwd):
 
     test(cmd, config, cwd)
 
+def test_wasmedge(filepath, config, cwd):
+    # compile wasm file
+    basename, ext = os.path.splitext(filepath)
+    so = basename + '.so'
+
+    # run with compiled file
+    wasmedgec_cmd = ['wasmedgec', filepath, so]
+    subprocess.check_call(wasmedgec_cmd, encoding='utf8')
+
+    cmd = ['wasmedge']
+
+    env = config.get('env')
+    if env != None:
+        for key in env:
+            cmd.append('--env')
+            cmd.append(key + '=' + env[key])
+
+    preopens = config.get('preopens')
+    if preopens != None:
+        for path in preopens:
+            cmd.append('--dir')
+            cmd.append(path + ':' + preopens[path])
+
+    cmd.append(so)
+
+    args = config.get('args')
+    if args != None:
+
+        for arg in args:
+            cmd.append(arg)
+
+    test(cmd, config, cwd)
+
 def main():
     inputs = []
     inputs.extend(sorted(glob.glob("target/wasm32-wasi/**/*.wasm")))
@@ -173,6 +206,7 @@ def main():
             "node": test_node,
             "wasmer": test_wasmer,
             "wasmtime": test_wasmtime,
+            "wasmedge": test_wasmedge,
     }
 
     for filepath in inputs:
